@@ -51,6 +51,24 @@ div {
   flex: 1 1 200px;
   overflow: hidden;
   transition: flex 300ms ease;
+  opacity: 0;
+  transform: translateY(-100px);
+  animation: fade-in 1200ms ease forwards;
+}
+
+.multiplayer {
+  animation-delay: 300ms;
+}
+
+.settings {
+  animation-delay: 600ms;
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 div:hover {
@@ -135,8 +153,13 @@ section div:hover p {
   section {
     flex-direction: column;
   }
+
   div:hover {
     flex: 1 1 200px;
+  }
+
+  div {
+    transform: translateX(-100px);
   }
 }
 </style>
