@@ -20,6 +20,8 @@ export interface Player {
 export interface Settings {
   amount: number;
   confetti: boolean;
+  deleteCorrect: boolean;
+  keepPosition: boolean;
 }
 
 export function firework() {
@@ -36,4 +38,6 @@ export function firework() {
 export const defaultSettings: Settings = {
   amount: 16,
   confetti: true,
+  deleteCorrect: false,
+  keepPosition: true,
 };

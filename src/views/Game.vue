@@ -13,7 +13,7 @@
         <p class="player-score">TIME: {{ players[0].time }}</p>
       </div>
       <div class="deck" :class="{ disabled: deckDisabled }">
-        <article class="card" v-for="(card, index) of cards" :key="index" @click="openCard(index)" :class="{ open: card.selected, correct: card.correct, incorrect: card.error }">
+        <article class="card" v-for="(card, index) of cards" :key="index" @click="openCard(index)" :class="{ open: card.selected, correct: card.correct, incorrect: card.error, hidden: card.hidden }">
           <img :src="getImgUrl(card.name)" :alt="card.name" />
         </article>
       </div>
@@ -37,6 +37,7 @@ interface card {
   selected: boolean;
   error: boolean;
   correct: boolean;
+  hidden: boolean;
 }
 
 @Component
@@ -86,6 +87,22 @@ export default class Game extends Vue {
         card2.correct = true;
         this.openedCards = [];
         this.players[this.currentPlayer].score++;
+
+        if (this.settings.deleteCorrect) {
+          if (this.settings.keepPosition) {
+            setTimeout(() => {
+              card1.hidden = true;
+              card2.hidden = true;
+            }, 1000);
+          } else {
+            this.deckDisabled = true;
+            setTimeout(() => {
+              this.cards.splice(this.cards.indexOf(card1), 1);
+              this.cards.splice(this.cards.indexOf(card2), 1);
+              this.deckDisabled = false;
+            }, 1000);
+          }
+        }
       } else {
         if (this.mode === "multiplayer") {
           if (this.currentPlayer === 0) {
@@ -112,11 +129,11 @@ export default class Game extends Vue {
     const correctRound = this.players[0].score + this.players[1].score;
     this.savePlayers(this.players);
 
-    if (correctRound >= this.cards.length / 2) {
+    if (correctRound >= this.settings.amount / 2) {
       clearInterval(this.interval);
       setTimeout(() => {
         this.$router.push("/victory");
-      }, 400);
+      }, 800);
     }
   }
 
@@ -141,6 +158,7 @@ export default class Game extends Vue {
         selected: false,
         error: false,
         correct: false,
+        hidden: false,
       });
       index++;
       if (index >= shuffledNames.length) clearInterval(cardInterval);
@@ -271,7 +289,6 @@ section {
   user-select: none;
   pointer-events: none;
   filter: drop-shadow(-5px -5px 15px rgba(0, 0, 0, 0.25));
-  transition: opacity 300ms ease;
 }
 
 .open img {
@@ -285,5 +302,10 @@ section {
 .correct {
   background: linear-gradient(to top left, #347536, #54c057);
   pointer-events: none;
+}
+
+.hidden {
+  pointer-events: none;
+  opacity: 0;
 }
 </style>

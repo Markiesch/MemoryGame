@@ -15,6 +15,14 @@
           <option value="16">16 tiles</option>
         </select>
       </div>
+      <div class="input-container select">
+        <input v-model="settings.deleteCorrect" id="deleteCorrect" type="checkbox" />
+        <label for="deleteCorrect">Should matched cards be deleted?</label>
+      </div>
+      <div class="input-container select">
+        <input v-model="settings.keepPosition" id="keepPosition" type="checkbox" />
+        <label for="keepPosition">Should the remaining cards stay in their position? NOTE: this only works when delete matched cards is enabled</label>
+      </div>
       <h2>Preferences</h2>
       <div class="input-container select">
         <input v-model="settings.confetti" id="confetti" type="checkbox" />
@@ -38,6 +46,8 @@ export default class Home extends Vue {
   settings: Settings = {
     amount: 16,
     confetti: true,
+    deleteCorrect: false,
+    keepPosition: true,
   };
   @Getter("getSettings") getSettings!: Settings;
 
@@ -70,6 +80,10 @@ h2 {
 .input-container {
   display: flex;
   align-items: center;
+}
+
+.input-container + .input-container {
+  margin-top: 1em;
 }
 
 input {
