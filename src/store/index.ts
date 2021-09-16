@@ -6,7 +6,7 @@ Vue.use(Vuex);
 
 // @ts-ignore
 let settings: Settings = JSON.parse(localStorage.getItem("settings"));
-if (!settings) settings = defaultSettings;
+if (settings === null || settings === undefined) settings = defaultSettings;
 
 export default new Vuex.Store({
   plugins: [saveStatePlugin],

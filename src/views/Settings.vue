@@ -58,11 +58,13 @@ section {
 
 h1 {
   font-size: 40px;
+  color: var(--primary-color);
 }
 
 h2 {
   font-size: 24px;
   margin: 1em 0 0.5em 0;
+  color: var(--primary-color);
 }
 
 .input-container {
@@ -78,6 +80,7 @@ input {
 label {
   user-select: none;
   padding-right: 1rem;
+  color: #444;
 }
 
 .select label {

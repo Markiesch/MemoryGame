@@ -3,7 +3,7 @@
   <main>
     <header>
       <h2>Memory</h2>
-      <h3><span>Round</span> {{ round }}</h3>
+      <h2><span>Round</span> {{ round }}</h2>
       <p>{{ mode }}</p>
     </header>
     <section>
@@ -30,7 +30,7 @@
 import { firework } from "../store/utils";
 import { Component, Vue } from "vue-property-decorator";
 import { Getter, Action } from "vuex-class";
-import { Settings } from "../store/utils";
+import { Settings, Player } from "../store/utils";
 
 interface card {
   name: string;
@@ -56,18 +56,18 @@ export default class Game extends Vue {
   victory = false;
   currentPlayer = 0;
 
-  @Getter("getMode") mode: any;
-  @Getter("getPlayers") players: any;
+  @Getter("getMode") mode!: string;
+  @Getter("getPlayers") players!: Player[];
   @Getter("getSettings") settings!: Settings;
   @Action("savePlayers") savePlayers: any;
 
-  startTimer(): void {
+  startTimer() {
     this.interval = setInterval(() => {
       this.players[this.currentPlayer].time++;
     }, 1000);
   }
 
-  openCard(index: number): void {
+  openCard(index: number) {
     if (this.openedCards.includes(index)) return;
     this.clicks++;
     if (this.clicks === 1) this.startTimer();
@@ -124,7 +124,7 @@ export default class Game extends Vue {
     return require("../assets/fruits/" + pic);
   }
 
-  init(): void {
+  init() {
     this.players[0].score = 0;
     this.players[0].time = 0;
     this.players[1].score = 0;
@@ -173,11 +173,12 @@ header {
   right: 0;
   z-index: 2;
   padding: 1rem 3rem;
+  color: var(--primary-color);
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-header h3 {
-  font-size: 22px;
+header h2 {
+  font-size: 24px;
 }
 
 section {

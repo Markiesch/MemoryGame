@@ -119,7 +119,7 @@ img {
   border: none;
   display: inline-block;
   text-decoration: none;
-  background-color: #1976d2;
+  background-color: var(--secondary-color);
   padding: 0.6em;
   border-radius: 5px;
   margin-top: 3em;
