@@ -35,6 +35,33 @@ export function firework() {
   confetti(Object.assign(defaults, { particleCount, origin: { x: 0.6, y: 0.5 } }));
 }
 
+export function launchConfetti() {
+  const end = Date.now() + 5 * 1000;
+  const colors = ["#bb0000", "#0859fd"];
+
+  frame();
+  function frame() {
+    confetti({
+      particleCount: 2,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0 },
+      colors: colors,
+    });
+    confetti({
+      particleCount: 2,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1 },
+      colors: colors,
+    });
+
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
+  }
+}
+
 export const defaultSettings: Settings = {
   amount: 16,
   confetti: true,

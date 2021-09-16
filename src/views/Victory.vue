@@ -25,44 +25,19 @@
 </template>
 
 <script lang="ts">
-// @ts-ignore
-import confetti from "canvas-confetti";
 import { Component, Vue } from "vue-property-decorator";
 import { Getter } from "vuex-class";
+import { launchConfetti } from "../store/utils";
 
 @Component
 export default class Victory extends Vue {
   mounted(): void {
     document.title = `Memory - Settings`;
-    this.frame();
+    launchConfetti();
   }
-
-  end = Date.now() + 5 * 1000;
-  colors = ["#bb0000", "#ffffff"];
 
   @Getter("getPlayers") players: any;
   @Getter("getMode") mode: any;
-
-  frame(): void {
-    confetti({
-      particleCount: 2,
-      angle: 60,
-      spread: 55,
-      origin: { x: 0 },
-      colors: this.colors,
-    });
-    confetti({
-      particleCount: 2,
-      angle: 120,
-      spread: 55,
-      origin: { x: 1 },
-      colors: this.colors,
-    });
-
-    if (Date.now() < this.end) {
-      requestAnimationFrame(this.frame);
-    }
-  }
 
   isTieScore() {
     return this.players[0].score === this.players[1].score;
@@ -74,7 +49,7 @@ export default class Victory extends Vue {
 
   winningPlayer() {
     if (this.mode === "singleplayer") return this.players[0].name;
-    if (this.isTieScore()) return this.players[0].time > this.players[1].time ? this.players[0].name : this.players[1].name;
+    if (this.isTieScore()) return this.players[0].time > this.players[1].time ? this.players[1].name : this.players[0].name;
     return this.players[0].score > this.players[1].score ? this.players[0].name : this.players[1].name;
   }
   winningScore() {
