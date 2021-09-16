@@ -1,8 +1,11 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { saveStatePlugin, State, Player, Settings } from "./utils";
+import { saveStatePlugin, State, Player, Settings, defaultSettings } from "./utils";
 
 Vue.use(Vuex);
+
+// @ts-ignore
+const settings: Settings = JSON.parse(localStorage.getItem("settings")) || defaultSettings;
 
 export default new Vuex.Store({
   plugins: [saveStatePlugin],
@@ -21,11 +24,14 @@ export default new Vuex.Store({
         time: 0,
       },
     ],
-    settings: {
-      confetti: true,
+    settings: settings,
+  },
+  mutations: {
+    setSettings(state, { settings }) {
+      console.log(settings);
+      state.settings = settings;
     },
   },
-  mutations: {},
   actions: {
     setMode({ state }: { state: State }, mode: "singleplayer" | "multiplayer") {
       state.mode = mode;
