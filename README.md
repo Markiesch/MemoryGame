@@ -1,6 +1,6 @@
 <div align="center">
     <a href="./" target="_blank">
-        <img src="assets/logo.png" alt="Logo" width="80" height="80" />
+        <img src="https://github.com/Markiesch/MemoryGame/blob/main/src/assets/logo.png" alt="Logo" width="80" height="80" />
     </a>
     <h1>Vue Memory Game</h1>
     <p>The classic memory game, with your favorite fruits</p>
