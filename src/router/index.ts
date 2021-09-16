@@ -7,7 +7,7 @@ import Settings from "../views/Settings.vue";
 
 Vue.use(VueRouter);
 
-const routes: Array<RouteConfig> = [
+const routes: RouteConfig[] = [
   {
     path: "/",
     name: "Home",

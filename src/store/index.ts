@@ -1,11 +1,12 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { saveStatePlugin } from "./utils";
+import { saveStatePlugin, State, Player, Settings } from "./utils";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   plugins: [saveStatePlugin],
+
   state: {
     mode: "singleplayer",
     players: [
@@ -26,22 +27,22 @@ export default new Vuex.Store({
   },
   mutations: {},
   actions: {
-    setMode({ state }, mode: "singleplayer" | "multiplayer") {
+    setMode({ state }: { state: State }, mode: "singleplayer" | "multiplayer") {
       state.mode = mode;
     },
-    savePlayers({ state }, players) {
+    savePlayers({ state }: { state: State }, players) {
       state.players = players;
     },
   },
   modules: {},
   getters: {
-    getMode(state): string {
+    getMode(state: State): string {
       return state.mode;
     },
-    getPlayers(state) {
+    getPlayers(state: State): Player[] {
       return state.players;
     },
-    getSettings(state) {
+    getSettings(state: State): Settings {
       return state.settings;
     },
   },
