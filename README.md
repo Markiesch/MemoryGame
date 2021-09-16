@@ -1,24 +1,21 @@
-# vue-memory-game
+<div align="center">
+    <a href="./" target="_blank">
+        <img src="assets/logo.png" alt="Logo" width="80" height="80" />
+    </a>
+    <h1>Vue Memory Game</h1>
+    <p>The classic memory game, with your favorite fruits</p>
+    <a href="./" target="_blank">View Website</a>
+    ·
+    <a href="https://github.com/Markiesch/MemoryGame/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/Markiesch/MemoryGame/issues">Request Feature</a>
+</div>
 
-## Project setup
-```
-yarn install
-```
+<br />
+<br />
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+### TODO
 
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+1. Add configuration settings
+1. Option to change player names
+1. Light/dark mode
