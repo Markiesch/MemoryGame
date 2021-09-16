@@ -43,7 +43,7 @@ export default class Home extends Vue {
 
   saveSettings() {
     console.log(this.settings);
-    this.$store.commit("setSettings", { settings: this.settings });
+    this.$store.commit("setSettings", this.settings);
   }
 }
 </script>

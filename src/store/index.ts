@@ -5,7 +5,8 @@ import { saveStatePlugin, State, Player, Settings, defaultSettings } from "./uti
 Vue.use(Vuex);
 
 // @ts-ignore
-const settings: Settings = JSON.parse(localStorage.getItem("settings")) || defaultSettings;
+let settings: Settings = JSON.parse(localStorage.getItem("settings"));
+if (!settings) settings = defaultSettings;
 
 export default new Vuex.Store({
   plugins: [saveStatePlugin],
@@ -27,8 +28,7 @@ export default new Vuex.Store({
     settings: settings,
   },
   mutations: {
-    setSettings(state, { settings }) {
-      console.log(settings);
+    setSettings(state: State, settings: Settings) {
       state.settings = settings;
     },
   },
