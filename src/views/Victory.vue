@@ -2,7 +2,8 @@
   <section>
     <img src="../assets/victory.png" alt="Victory!" />
     <h1>Victory!</h1>
-    <p>{{ winningPlayer() }} won with {{ winningScore() }} point{{ winningScore() === 1 ? "" : "s" }}</p>
+    <p v-if="isTieScore() && isTieTime()">It is an tie! You both got {{ winningScore() }} points</p>
+    <p v-else>{{ winningPlayer() }} won with {{ winningScore() }} point{{ winningScore() === 1 ? "" : "s" }}</p>
     <div class="player-container">
       <p class="player">{{ players[0].name }}</p>
       <p>VS</p>
