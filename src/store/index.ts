@@ -25,11 +25,11 @@ export default new Vuex.Store({
         time: 0,
       },
     ],
-    settings: settings,
+    settings,
   },
   mutations: {
-    setSettings(state: State, settings: Settings) {
-      state.settings = settings;
+    setSettings(state: State, newSettings: Settings) {
+      state.settings = newSettings;
     },
   },
   actions: {
