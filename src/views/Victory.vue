@@ -32,6 +32,11 @@ import { Getter } from "vuex-class";
 
 @Component
 export default class Victory extends Vue {
+  mounted(): void {
+    document.title = `Memory - Settings`;
+    this.frame();
+  }
+
   end = Date.now() + 5 * 1000;
   colors = ["#bb0000", "#ffffff"];
 
@@ -75,10 +80,6 @@ export default class Victory extends Vue {
   winningScore() {
     return this.players[0].score > this.players[1].score ? this.players[0].score : this.players[1].score;
   }
-
-  mounted(): void {
-    this.frame();
-  }
 }
 </script>
 
@@ -89,7 +90,7 @@ section {
 }
 
 h1 {
-  font-size: 50px;
+  font-size: 70px;
 }
 
 img {
