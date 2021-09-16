@@ -16,7 +16,7 @@
         </select>
       </div>
       <h2>Preferences</h2>
-      <div class="input-container">
+      <div class="input-container select">
         <input v-model="settings.confetti" id="confetti" type="checkbox" />
         <label for="confetti">Fire confetti when I get a correct match</label>
       </div>
@@ -65,19 +65,34 @@ h2 {
   margin: 1em 0 0.5em 0;
 }
 
+.input-container {
+  display: flex;
+  align-items: center;
+}
+
 input {
-  appearance: none;
   border: 1px solid #cacece;
+  cursor: pointer;
+}
+
+label {
+  user-select: none;
+  padding-right: 1rem;
+}
+
+.select label {
+  cursor: pointer;
+  padding-left: 1rem;
+}
+
+.select input {
+  appearance: none;
   padding: 10px;
   border-radius: 50%;
   position: relative;
 }
 
-label {
-  user-select: none;
-}
-
-input::after {
+.select input::after {
   content: "";
   position: absolute;
   top: 0;
@@ -87,19 +102,14 @@ input::after {
   border-radius: 50%;
 }
 
-input:checked::after {
-  background-color: var(--primary-color);
-}
-
-.input-container {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
+.select input:checked::after {
+  border: 8px solid var(--primary-color);
 }
 
 select {
   border: 1px solid #cacece;
   padding: 0.25em;
+  cursor: pointer;
   outline: none;
 }
 </style>

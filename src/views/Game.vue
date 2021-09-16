@@ -13,9 +13,9 @@
         <p class="player-score">TIME: {{ players[0].time }}</p>
       </div>
       <div class="deck" :class="{ disabled: deckDisabled }">
-        <div class="card" v-for="(card, index) of cards" :key="index" @click="openCard(index)" :class="{ open: card.selected, correct: card.correct, incorrect: card.error }">
+        <article class="card" v-for="(card, index) of cards" :key="index" @click="openCard(index)" :class="{ open: card.selected, correct: card.correct, incorrect: card.error }">
           <img :src="getImgUrl(card.name)" :alt="card.name" />
-        </div>
+        </article>
       </div>
       <div class="player player2" :class="{ ghostplayer: currentPlayer === 0 }">
         <p class="player-name">{{ players[1].name || "PLAYER 2" }}</p>
