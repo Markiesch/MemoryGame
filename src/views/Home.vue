@@ -33,36 +33,84 @@ export default class Home extends Vue {
 
 <style scoped>
 section {
-  background-color: rgb(20, 20, 20);
+  background-color: rgb(10, 10, 10);
   margin: 0 auto;
-  padding: 3rem;
+  padding: 4rem;
   display: flex;
+  gap: 1rem;
   min-height: 100vh;
 }
 
-@media screen and (max-width: 900px) {
-  section {
-    flex-direction: column;
-  }
-}
-
 div {
-  flex: 1 1 200px;
-  transition: flex 300ms ease;
   position: relative;
   display: flex;
-  flex-direction: column;
+  cursor: pointer;
   justify-content: flex-end;
   align-items: center;
+  flex-direction: column;
+  flex: 1 1 200px;
   overflow: hidden;
+  transition: flex 300ms ease;
+}
+
+div:hover {
+  flex: 1 1 350px;
+}
+
+div::after {
+  content: "";
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transition: filter 1000ms ease;
+  filter: brightness(0.7);
+  background-position: center center;
+  background-size: cover;
+}
+
+div:hover::after {
+  filter: brightness(1);
+}
+
+.singleplayer::after {
+  background-image: url("../assets/singleplayer.jpg");
+}
+
+.multiplayer::after {
+  background-image: url("../assets/multiplayer.jpg");
+  filter: brightness(0.5);
+}
+
+.settings::after {
+  background-image: url("../assets/settings.jpg");
+}
+
+div::before {
+  content: "";
+  z-index: 2;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+  transition: height 500ms ease 300ms;
+}
+
+div:hover::before {
+  height: 400px;
 }
 
 h5,
 p {
-  font-size: clamp(2rem, 0.5rem + 6.65vw, 4rem);
+  font-size: clamp(2rem, 0.5rem + 4vw, 4rem);
+  z-index: 3;
   color: white;
   transform: translateY(100px);
-  transition: transform 500ms ease, opacity 300ms ease 300ms;
+  transition: transform 500ms ease 300ms, opacity 300ms ease 500ms;
   user-select: none;
 }
 
@@ -75,7 +123,7 @@ p {
   opacity: 0;
   color: rgb(197, 197, 197);
   margin: 1rem 0 4rem 0;
-  font-size: clamp(1.25rem, 0.875rem + 1.65vw, 1.75rem);
+  font-size: clamp(1.25rem, 0.875rem + 1vw, 1.75rem);
   font-weight: 300;
 }
 
@@ -83,42 +131,12 @@ section div:hover p {
   opacity: 1;
 }
 
-div::before {
-  content: "";
-  z-index: 0;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  height: 100px;
-  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
-  transition: height 300ms ease;
-}
-
-div:hover::before {
-  height: 400px;
-}
-
-div:hover {
-  flex: 1 1 350px;
-  cursor: pointer;
-}
-
-.singleplayer {
-  background-image: url("../assets/singleplayer.jpg");
-  background-position: center center;
-  background-size: cover;
-}
-
-.multiplayer {
-  background-image: url("../assets/multiplayer.jpg");
-  background-position: center center;
-  background-size: cover;
-}
-
-.settings {
-  background-image: url("../assets/settings.jpg");
-  background-position: center center;
-  background-size: cover;
+@media screen and (max-width: 900px) {
+  section {
+    flex-direction: column;
+  }
+  div:hover {
+    flex: 1 1 200px;
+  }
 }
 </style>
