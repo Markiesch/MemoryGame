@@ -30,7 +30,7 @@ export default new Vuex.Store({
     setMode({ state }: { state: State }, mode: "singleplayer" | "multiplayer") {
       state.mode = mode;
     },
-    savePlayers({ state }: { state: State }, players) {
+    savePlayers({ state }: { state: State }, players: Player[]) {
       state.players = players;
     },
   },
