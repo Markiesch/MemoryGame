@@ -16,7 +16,7 @@ export default new Vuex.Store({
 
   state: {
     mode: "singleplayer",
-    loadRecent: false,
+    loadRecent: true,
     players: [
       {
         score: 0,
