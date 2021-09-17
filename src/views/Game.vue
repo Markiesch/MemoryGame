@@ -151,6 +151,7 @@ export default class Game extends Vue {
       this.savePlayers(this.latestGame.players);
 
       for (const card of this.cards) {
+        card.error = false;
         if (!card.correct) card.selected = false;
       }
     } else {
