@@ -20,6 +20,10 @@
           <option value="12">12 tiles</option>
           <option value="14">14 tiles</option>
           <option value="16">16 tiles</option>
+          <option value="18">18 tiles</option>
+          <option value="20">20 tiles</option>
+          <option value="22">22 tiles</option>
+          <option value="24">24 tiles</option>
         </select>
       </div>
       <div class="input-container select">
