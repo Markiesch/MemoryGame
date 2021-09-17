@@ -182,6 +182,10 @@ p {
     flex-direction: column;
   }
 
+  .navigator-container {
+    padding: 1rem;
+  }
+
   .navigator:hover {
     flex: 1 1 200px;
   }
