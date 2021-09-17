@@ -34,6 +34,7 @@ import { launchConfetti, Player, Settings } from "../store/utils";
 export default class Victory extends Vue {
   mounted(): void {
     document.title = `Memory - Settings`;
+    localStorage.removeItem("recentGame");
     launchConfetti();
   }
 
