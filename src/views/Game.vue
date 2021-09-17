@@ -20,7 +20,7 @@
         </article>
       </div>
       <div class="player player2" :class="{ ghostplayer: currentPlayer === 0 }">
-        <p class="player-name">PLAYER 2</p>
+        <p class="player-name">{{ mode === "bot" ? "Walli" : "PLAYER 2" }}</p>
         <p class="player-score">SCORE: {{ players[1].score }}</p>
         <p class="player-score">TIME: {{ players[1].time }}</p>
       </div>
@@ -71,6 +71,18 @@ export default class Game extends Vue {
   }
 
   openCard(index: number) {
+    function getRandomIndex(cards: Card[]) {
+      let indexes = [];
+      for (const card of cards) {
+        if (card.selected === false) {
+          indexes.push(cards.indexOf(card));
+        }
+      }
+
+      console.log(indexes);
+      const randomIndex = Math.floor(Math.random() * indexes.length);
+      return indexes[randomIndex];
+    }
     if (this.openedCards.includes(index)) return;
     this.clicks++;
     if (this.clicks === 1) this.startTimer();
@@ -105,8 +117,17 @@ export default class Game extends Vue {
             }, 1000);
           }
         }
+
+        if (this.mode === "bot" && this.currentPlayer === 1) {
+          setTimeout(() => {
+            this.openCard(getRandomIndex(this.cards));
+            setTimeout(() => {
+              this.openCard(getRandomIndex(this.cards));
+            }, 600);
+          }, 1300);
+        }
       } else {
-        if (this.mode === "multiplayer") {
+        if (this.mode === "multiplayer" || this.mode === "bot") {
           if (this.currentPlayer === 0) {
             this.currentPlayer = 1;
           } else {
@@ -124,6 +145,15 @@ export default class Game extends Vue {
           card2.selected = false;
           this.deckDisabled = false;
           this.openedCards = [];
+
+          if (this.mode === "bot" && this.currentPlayer) {
+            setTimeout(() => {
+              this.openCard(getRandomIndex(this.cards));
+              setTimeout(() => {
+                this.openCard(getRandomIndex(this.cards));
+              }, 600);
+            }, 300);
+          }
         }, 1000);
       }
     }

@@ -5,6 +5,10 @@
       <h5>Singleplayer</h5>
       <p>Trying to defeat yourself?</p>
     </div>
+    <div @click="navigate('bot')" class="bot navigator">
+      <h5>Bot</h5>
+      <p>Please don't bully this dumb bot..</p>
+    </div>
     <div @click="navigate('multiplayer')" class="multiplayer navigator">
       <h5>Multiplayer</h5>
       <p>Found yourself a challenger?</p>

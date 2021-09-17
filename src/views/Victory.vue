@@ -5,9 +5,9 @@
     <p v-if="isTieScore() && isTieTime()">It is a tie! You both got {{ winningScore() }} points</p>
     <p v-else>{{ winningPlayer() }} won with {{ winningScore() }} point{{ winningScore() === 1 ? "" : "s" }}</p>
     <div class="player-container">
-      <p class="player">{{ settings.name }}</p>
+      <p class="player">{{ settings.name || "PLAYER 1" }}</p>
       <p>VS</p>
-      <p class="player">{{ settings.name2 }}</p>
+      <p class="player">{{ mode === "bot" ? "Walli" : settings.name2 || "PLAYER 2" }}</p>
     </div>
     <div class="score-container">
       <div>

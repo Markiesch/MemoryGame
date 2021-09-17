@@ -84,6 +84,10 @@ div:hover::after {
   background-image: url("../assets/multiplayer.jpg");
 }
 
+.bot::after {
+  background-image: url("../assets/robot.jpg");
+}
+
 .settings::after {
   background-image: url("../assets/settings.jpg");
 }
