@@ -34,7 +34,14 @@ import { Component, Vue } from "vue-property-decorator";
 import { Getter, Action } from "vuex-class";
 import { Card, Settings, Player, recentGame } from "../store/utils";
 
-@Component
+let interval: any;
+
+@Component({
+  beforeRouteLeave(to, from, next) {
+    clearInterval(interval);
+    next();
+  },
+})
 export default class Game extends Vue {
   mounted(): void {
     document.title = `Memory - ${this.mode}`;
@@ -46,7 +53,6 @@ export default class Game extends Vue {
   clicks = 0;
   cards: Card[] = [];
   openedCards: number[] = [];
-  interval: any;
   deckDisabled = false;
   victory = false;
   currentPlayer = 0;
@@ -59,7 +65,7 @@ export default class Game extends Vue {
   @Action("savePlayers") savePlayers: any;
 
   startTimer() {
-    this.interval = setInterval(() => {
+    interval = setInterval(() => {
       this.players[this.currentPlayer].time++;
     }, 1000);
   }
@@ -126,7 +132,7 @@ export default class Game extends Vue {
     this.savePlayers(this.players);
 
     if (correctRound >= this.settings.amount / 2) {
-      clearInterval(this.interval);
+      clearInterval(interval);
       setTimeout(() => {
         this.$router.push("/victory");
       }, 800);
