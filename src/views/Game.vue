@@ -8,7 +8,7 @@
     </header>
     <section>
       <div class="player player1" :class="{ ghostplayer: currentPlayer === 1 }">
-        <p class="player-name">{{ players[0].name || "PLAYER 1" }}</p>
+        <p class="player-name">{{ settings.name || "PLAYER 1" }}</p>
         <p class="player-score">SCORE: {{ players[0].score }}</p>
         <p class="player-score">TIME: {{ players[0].time }}</p>
       </div>
@@ -18,7 +18,7 @@
         </article>
       </div>
       <div class="player player2" :class="{ ghostplayer: currentPlayer === 0 }">
-        <p class="player-name">{{ players[1].name || "PLAYER 2" }}</p>
+        <p class="player-name">PLAYER 2</p>
         <p class="player-score">SCORE: {{ players[1].score }}</p>
         <p class="player-score">TIME: {{ players[1].time }}</p>
       </div>
@@ -270,7 +270,8 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
-  aspect-ratio: 1;
+  padding-bottom: 100%;
+  height: 0;
   user-select: none;
   overflow: hidden;
   cursor: pointer;
