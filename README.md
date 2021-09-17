@@ -14,8 +14,49 @@
 <br />
 <br />
 
-### TODO
+<details open="open">
+    <ol>
+        <li>
+            <a href="#about-the-project">About The Project</a>
+            <ul>
+                <li><a href="#build-with">Build With</a></li>
+            </ul>
+        </li>
+        <li><a href="#installation">Installation</a></li>
+        <li><a href="#contributing">Contributing</a></li>
+    </ol>
+</details>
 
-1. Add configuration settings
-1. Option to change player names
-1. Light/dark mode
+## About The Project
+
+The memory game is a pair matching game where the player has to click on 2 cards, if they are the same then they remain. The game ends whenever all cards are flipped successfully
+
+### Build With
+
+- [Vue JS 2](https://vuejs.org/v2/guide/)
+- [Typescript](https://typescriptlang.org/)
+
+## Installation
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/Markiesch/MemoryGame.git
+   ```
+2. Install NPM packages
+   ```sh
+   yarn install
+   ```
+3. Start a dev server
+   ```sh
+   yarn serve
+   ```
+
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
