@@ -35,6 +35,7 @@ export default class Victory extends Vue {
   mounted(): void {
     document.title = `Memory - Settings`;
     localStorage.removeItem("recentGame");
+    this.$store.state.recentGame = null;
     launchConfetti();
   }
 
