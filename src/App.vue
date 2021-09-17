@@ -29,9 +29,4 @@ body {
   pointer-events: none;
   user-select: none;
 }
-
-header span {
-  font-weight: 300;
-  font-size: 16px;
-}
 </style>

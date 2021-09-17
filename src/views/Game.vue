@@ -3,7 +3,7 @@
   <main>
     <header>
       <nav>
-        <h2>Memory</h2>
+        <router-link to="/">Memory</router-link>
         <h2><span>Round</span> {{ round }}</h2>
         <p>{{ mode }}</p>
       </nav>
@@ -32,15 +32,7 @@
 import { firework } from "../store/utils";
 import { Component, Vue } from "vue-property-decorator";
 import { Getter, Action } from "vuex-class";
-import { Settings, Player } from "../store/utils";
-
-interface card {
-  name: string;
-  selected: boolean;
-  error: boolean;
-  correct: boolean;
-  hidden: boolean;
-}
+import { Card, Settings, Player, recentGame } from "../store/utils";
 
 @Component
 export default class Game extends Vue {
@@ -52,7 +44,7 @@ export default class Game extends Vue {
   round = 0;
   time = 0;
   clicks = 0;
-  cards: card[] = [];
+  cards: Card[] = [];
   openedCards: number[] = [];
   interval: any;
   deckDisabled = false;
@@ -62,6 +54,8 @@ export default class Game extends Vue {
   @Getter("getMode") mode!: string;
   @Getter("getPlayers") players!: Player[];
   @Getter("getSettings") settings!: Settings;
+  @Getter("getLoadRecent") loadRecent!: boolean;
+  @Getter("getLatestGame") latestGame!: recentGame;
   @Action("savePlayers") savePlayers: any;
 
   startTimer() {
@@ -137,6 +131,14 @@ export default class Game extends Vue {
         this.$router.push("/victory");
       }, 800);
     }
+
+    console.log(this.players);
+    const save = {
+      cards: this.cards,
+      mode: this.mode,
+      players: this.players,
+    };
+    this.$store.commit("setLatestGame", save);
   }
 
   getImgUrl(pic: string): string {
@@ -144,27 +146,36 @@ export default class Game extends Vue {
   }
 
   init() {
-    this.players[0].score = 0;
-    this.players[0].time = 0;
-    this.players[1].score = 0;
-    this.players[1].time = 0;
-    const slots = ["apple.png", "banana.png", "coconut.png", "kiwi.png", "melon.png", "pear.png", "pineapple.png", "plum.png"];
-    const items = slots.slice(0, this.settings.amount / 2);
-    const shuffledNames = this.shuffle([...items, ...items]);
+    if (this.loadRecent && this.latestGame !== null) {
+      this.cards = this.latestGame.cards;
+      this.savePlayers(this.latestGame.players);
 
-    let index = 0;
-    const cardInterval = setInterval(() => {
-      const shuffledName = shuffledNames[index];
-      this.cards.push({
-        name: shuffledName,
-        selected: false,
-        error: false,
-        correct: false,
-        hidden: false,
-      });
-      index++;
-      if (index >= shuffledNames.length) clearInterval(cardInterval);
-    }, 75);
+      for (const card of this.cards) {
+        if (!card.correct) card.selected = false;
+      }
+    } else {
+      this.players[0].score = 0;
+      this.players[0].time = 0;
+      this.players[1].score = 0;
+      this.players[1].time = 0;
+      const slots = ["apple.png", "banana.png", "coconut.png", "kiwi.png", "melon.png", "pear.png", "pineapple.png", "plum.png"];
+      const items = slots.slice(0, this.settings.amount / 2);
+      const shuffledNames = this.shuffle([...items, ...items]);
+
+      let index = 0;
+      const cardInterval = setInterval(() => {
+        const shuffledName = shuffledNames[index];
+        this.cards.push({
+          name: shuffledName,
+          selected: false,
+          error: false,
+          correct: false,
+          hidden: false,
+        });
+        index++;
+        if (index >= shuffledNames.length) clearInterval(cardInterval);
+      }, 75);
+    }
   }
 
   shuffle(cards: string[]): string[] {
@@ -185,7 +196,6 @@ export default class Game extends Vue {
 <style scoped>
 header {
   position: fixed;
-
   top: 0;
   left: 0;
   right: 0;
@@ -204,8 +214,16 @@ nav {
   margin: 0 auto;
 }
 
-header h2 {
+nav h2,
+nav a {
   font-size: 24px;
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+nav span {
+  font-weight: 300;
+  font-size: 0.8em;
 }
 
 section {

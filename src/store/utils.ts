@@ -2,13 +2,26 @@
 import confetti from "canvas-confetti";
 
 export function saveStatePlugin(store: any) {
-  store.subscribe((mutation: any, state: State) => localStorage.setItem("settings", JSON.stringify(state.settings)));
+  store.subscribe((mutation: any, state: State) => {
+    localStorage.setItem("settings", JSON.stringify(state.settings));
+    localStorage.setItem("recentGame", JSON.stringify(state.recentGame));
+  });
 }
 
 export interface State {
   mode: string;
+  loadRecent: boolean;
   players: Player[];
   settings: Settings;
+  recentGame: recentGame | null;
+}
+
+export interface Card {
+  name: string;
+  selected: boolean;
+  error: boolean;
+  correct: boolean;
+  hidden: boolean;
 }
 
 export interface Player {
@@ -37,7 +50,8 @@ export function firework() {
 }
 
 export function launchConfetti() {
-  const end = Date.now() + 5 * 1000;
+  const length = 5000;
+  const end = Date.now() + length;
   const colors = ["#bb0000", "#0859fd"];
 
   frame();
@@ -71,3 +85,9 @@ export const defaultSettings: Settings = {
   deleteCorrect: false,
   keepPosition: true,
 };
+
+export interface recentGame {
+  cards: Card[];
+  mode: string;
+  players: Player[];
+}
