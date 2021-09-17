@@ -15,12 +15,10 @@ export default new Vuex.Store({
     mode: "singleplayer",
     players: [
       {
-        name: "PLAYER 1",
         score: 0,
         time: 0,
       },
       {
-        name: "PLAYER 2",
         score: 0,
         time: 0,
       },

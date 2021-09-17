@@ -2,12 +2,12 @@
   <section>
     <img src="../assets/victory.png" alt="Victory!" />
     <h1>Victory!</h1>
-    <p v-if="isTieScore() && isTieTime()">It is an tie! You both got {{ winningScore() }} points</p>
+    <p v-if="isTieScore() && isTieTime()">It is a tie! You both got {{ winningScore() }} points</p>
     <p v-else>{{ winningPlayer() }} won with {{ winningScore() }} point{{ winningScore() === 1 ? "" : "s" }}</p>
     <div class="player-container">
-      <p class="player">{{ players[0].name }}</p>
+      <p class="player">{{ settings.name }}</p>
       <p>VS</p>
-      <p class="player">{{ players[1].name }}</p>
+      <p class="player">{{ settings.name2 }}</p>
     </div>
     <div class="score-container">
       <div>
@@ -28,7 +28,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { Getter } from "vuex-class";
-import { launchConfetti } from "../store/utils";
+import { launchConfetti, Player, Settings } from "../store/utils";
 
 @Component
 export default class Victory extends Vue {
@@ -37,7 +37,8 @@ export default class Victory extends Vue {
     launchConfetti();
   }
 
-  @Getter("getPlayers") players: any;
+  @Getter("getPlayers") players!: Player[];
+  @Getter("getSettings") settings!: Settings;
   @Getter("getMode") mode: any;
 
   isTieScore() {
@@ -49,9 +50,9 @@ export default class Victory extends Vue {
   }
 
   winningPlayer() {
-    if (this.mode === "singleplayer") return this.players[0].name;
-    if (this.isTieScore()) return this.players[0].time > this.players[1].time ? this.players[1].name : this.players[0].name;
-    return this.players[0].score > this.players[1].score ? this.players[0].name : this.players[1].name;
+    if (this.mode === "singleplayer") return this.settings.name;
+    if (this.isTieScore()) return this.players[0].time > this.players[1].time ? this.settings.name : this.settings.name2;
+    return this.players[0].score > this.players[1].score ? this.settings.name : this.settings.name2;
   }
   winningScore() {
     return this.players[0].score > this.players[1].score ? this.players[0].score : this.players[1].score;

@@ -12,12 +12,13 @@ export interface State {
 }
 
 export interface Player {
-  name: string;
   score: number;
   time: number;
 }
 
 export interface Settings {
+  name: string;
+  name2: string;
   amount: number;
   confetti: boolean;
   deleteCorrect: boolean;
@@ -63,6 +64,8 @@ export function launchConfetti() {
 }
 
 export const defaultSettings: Settings = {
+  name: "PLAYER 1",
+  name2: "PLAYER 2",
   amount: 16,
   confetti: true,
   deleteCorrect: false,

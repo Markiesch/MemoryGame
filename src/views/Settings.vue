@@ -30,6 +30,14 @@
         <input v-model="settings.keepPosition" id="keepPosition" type="checkbox" />
         <label for="keepPosition">Should the remaining cards stay in their position? NOTE: this only works when delete matched cards is enabled</label>
       </div>
+      <div class="input-container text">
+        <label for="player1">Player 1</label>
+        <input placeholder="Player 1" v-model="settings.name" id="player1" type="text" />
+      </div>
+      <div class="input-container text">
+        <label for="player2">Player 2</label>
+        <input placeholder="Player 2" v-model="settings.name2" id="player2" type="text" />
+      </div>
       <h2>Preferences</h2>
       <div class="input-container select">
         <input v-model="settings.confetti" id="confetti" type="checkbox" />
@@ -47,19 +55,11 @@ import { Settings } from "../store/utils";
 @Component
 export default class Home extends Vue {
   mounted() {
-    this.settings = this.getSettings;
     document.title = `Memory - Settings`;
   }
-  settings: Settings = {
-    amount: 16,
-    confetti: true,
-    deleteCorrect: false,
-    keepPosition: true,
-  };
-  @Getter("getSettings") getSettings!: Settings;
+  @Getter("getSettings") settings!: Settings;
 
   saveSettings() {
-    console.log(this.settings);
     this.$store.commit("setSettings", this.settings);
   }
 }
@@ -107,6 +107,19 @@ label {
   user-select: none;
   padding-right: 1rem;
   color: #444;
+}
+
+.text {
+  display: block;
+}
+
+.text input {
+  display: block;
+  border: 1px solid #cacece;
+  cursor: initial;
+  padding: 0.25em;
+  margin-top: 0.5em;
+  outline: none;
 }
 
 .select label {

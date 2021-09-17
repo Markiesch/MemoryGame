@@ -1,14 +1,15 @@
 <template>
-  <section>
-    <div @click="navigate('Game', 'singleplayer')" class="singleplayer">
+  <section class="navigator-container">
+    <div @click.self="navigate('Game', 'singleplayer')" class="singleplayer navigator">
+      <input v-model="settings.name" @input="saveSettings()" type="text" placeholder="Username" />
       <h5>Singleplayer</h5>
       <p>Trying to defeat yourself?</p>
     </div>
-    <div @click="navigate('Game', 'multiplayer')" class="multiplayer">
+    <div @click="navigate('Game', 'multiplayer')" class="multiplayer navigator">
       <h5>Multiplayer</h5>
       <p>Found yourself a challenger?</p>
     </div>
-    <div @click="navigate('Settings')" class="settings">
+    <div @click="navigate('Settings')" class="settings navigator">
       <h5>Settings</h5>
       <p>Customize your experience!</p>
     </div>
@@ -18,30 +19,57 @@
 <script lang="ts">
 import router from "@/router";
 import { Component, Vue } from "vue-property-decorator";
-import { Action } from "vuex-class";
+import { Getter, Action } from "vuex-class";
+import { Settings } from "../store/utils";
 
 @Component
 export default class Home extends Vue {
+  mounted() {
+    document.title = `Memory - Main Menu`;
+  }
+
+  @Getter("getSettings") settings!: Settings;
   @Action("setMode") setMode: any;
 
   navigate(to: string, mode: "singleplayer" | "multiplayer") {
     if (mode) this.setMode(mode);
     router.push({ name: to });
   }
+
+  saveSettings() {
+    this.$store.commit("setSettings", this.settings);
+  }
 }
 </script>
 
 <style scoped>
-section {
-  background-color: rgb(10, 10, 10);
+input {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  border: none;
+  text-align: center;
+  color: white;
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.1);
+  font-size: 30px;
+  padding: 0.5em;
+  border-radius: 5px;
+  max-width: 95%;
+}
+
+.navigator-container {
   margin: 0 auto;
-  padding: 4rem;
+  padding: 6rem;
   display: flex;
   gap: 1rem;
+  background-color: rgb(10, 10, 10);
   min-height: 100vh;
 }
 
-div {
+.navigator {
   position: relative;
   display: flex;
   cursor: pointer;
@@ -71,11 +99,11 @@ div {
   }
 }
 
-div:hover {
+.navigator:hover {
   flex: 1 1 350px;
 }
 
-div::after {
+.navigator::after {
   content: "";
   z-index: 1;
   position: absolute;
@@ -106,7 +134,7 @@ div:hover::after {
   background-image: url("../assets/settings.jpg");
 }
 
-div::before {
+.navigator::before {
   content: "";
   z-index: 2;
   position: absolute;
@@ -118,7 +146,7 @@ div::before {
   transition: height 500ms ease 300ms;
 }
 
-div:hover::before {
+.navigator:hover::before {
   height: 400px;
 }
 
@@ -132,8 +160,8 @@ p {
   user-select: none;
 }
 
-section div:hover h5,
-section div:hover p {
+.navigator:hover h5,
+.navigator:hover p {
   transform: translateY(0);
 }
 
@@ -145,7 +173,7 @@ p {
   font-weight: 300;
 }
 
-section div:hover p {
+.navigator:hover p {
   opacity: 1;
 }
 
@@ -154,11 +182,11 @@ section div:hover p {
     flex-direction: column;
   }
 
-  div:hover {
+  .navigator:hover {
     flex: 1 1 200px;
   }
 
-  div {
+  .navigator {
     transform: translateX(-100px);
   }
 }
