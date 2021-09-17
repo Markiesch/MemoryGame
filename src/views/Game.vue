@@ -158,7 +158,7 @@ export default class Game extends Vue {
       this.players[0].time = 0;
       this.players[1].score = 0;
       this.players[1].time = 0;
-      const slots = ["apple.png", "banana.png", "coconut.png", "kiwi.png", "melon.png", "pear.png", "pineapple.png", "plum.png"];
+      const slots = ["apple.png", "banana.png", "coconut.png", "kiwi.png", "melon.png", "pear.png", "pineapple.png", "plum.png", "grapes.png", "orange.png", "raspberries.png", "cherry.png"];
       const items = slots.slice(0, this.settings.amount / 2);
       const shuffledNames = this.shuffle([...items, ...items]);
 
