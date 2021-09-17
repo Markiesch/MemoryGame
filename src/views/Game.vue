@@ -132,7 +132,6 @@ export default class Game extends Vue {
       }, 800);
     }
 
-    console.log(this.players);
     const save = {
       cards: this.cards,
       mode: this.mode,
