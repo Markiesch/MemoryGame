@@ -15,7 +15,13 @@
         <p class="player-score">TIME: {{ players[0].time }}</p>
       </div>
       <div class="deck" :class="{ disabled: deckDisabled }">
-        <article class="card" v-for="(card, index) of cards" :key="index" @click="openCard(index)" :class="{ open: card.selected, correct: card.correct, incorrect: card.error, hidden: card.hidden }">
+        <article
+          class="card"
+          v-for="(card, index) of cards"
+          :key="index"
+          @click="openCard(index, false)"
+          :class="{ open: card.selected, correct: card.correct, incorrect: card.error, hidden: card.hidden }"
+        >
           <img :src="getImgUrl(card.name)" :alt="card.name" />
         </article>
       </div>
@@ -70,7 +76,8 @@ export default class Game extends Vue {
     }, 1000);
   }
 
-  openCard(index: number) {
+  openCard(index: number, isBot: boolean) {
+    if (!isBot && this.currentPlayer === 1) return;
     function getRandomIndex(cards: Card[]) {
       let indexes = [];
       for (const card of cards) {
@@ -120,9 +127,9 @@ export default class Game extends Vue {
 
         if (this.mode === "bot" && this.currentPlayer === 1) {
           setTimeout(() => {
-            this.openCard(getRandomIndex(this.cards));
+            this.openCard(getRandomIndex(this.cards), true);
             setTimeout(() => {
-              this.openCard(getRandomIndex(this.cards));
+              this.openCard(getRandomIndex(this.cards), true);
             }, 600);
           }, 1300);
         }
@@ -148,9 +155,9 @@ export default class Game extends Vue {
 
           if (this.mode === "bot" && this.currentPlayer) {
             setTimeout(() => {
-              this.openCard(getRandomIndex(this.cards));
+              this.openCard(getRandomIndex(this.cards), true);
               setTimeout(() => {
-                this.openCard(getRandomIndex(this.cards));
+                this.openCard(getRandomIndex(this.cards), true);
               }, 600);
             }, 300);
           }
