@@ -285,6 +285,10 @@ section {
 }
 
 .card img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   height: 90%;
   opacity: 0;
   user-select: none;
