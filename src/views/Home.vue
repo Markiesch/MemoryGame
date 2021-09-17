@@ -112,7 +112,7 @@ input {
   bottom: 0;
   left: 0;
   transition: filter 1000ms ease;
-  filter: brightness(0.7);
+  filter: brightness(0.4);
   background-position: center center;
   background-size: cover;
 }
@@ -127,7 +127,6 @@ div:hover::after {
 
 .multiplayer::after {
   background-image: url("../assets/multiplayer.jpg");
-  filter: brightness(0.5);
 }
 
 .settings::after {
@@ -143,7 +142,7 @@ div:hover::after {
   right: 0;
   height: 100px;
   background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
-  transition: height 500ms ease 300ms;
+  transition: height 500ms ease;
 }
 
 .navigator:hover::before {
@@ -156,7 +155,7 @@ p {
   z-index: 3;
   color: white;
   transform: translateY(100px);
-  transition: transform 500ms ease 300ms, opacity 300ms ease 500ms;
+  transition: transform 500ms ease, opacity 300ms ease;
   user-select: none;
 }
 

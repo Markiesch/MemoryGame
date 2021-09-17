@@ -2,9 +2,11 @@
 <template>
   <main>
     <header>
-      <h2>Memory</h2>
-      <h2><span>Round</span> {{ round }}</h2>
-      <p>{{ mode }}</p>
+      <nav>
+        <h2>Memory</h2>
+        <h2><span>Round</span> {{ round }}</h2>
+        <p>{{ mode }}</p>
+      </nav>
     </header>
     <section>
       <div class="player player1" :class="{ ghostplayer: currentPlayer === 1 }">
@@ -183,16 +185,23 @@ export default class Game extends Vue {
 <style scoped>
 header {
   position: fixed;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+
   top: 0;
   left: 0;
   right: 0;
   z-index: 2;
-  padding: 1rem 3rem;
   color: var(--primary-color);
+  background-color: white;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1440px;
+  padding: 1rem;
+  margin: 0 auto;
 }
 
 header h2 {
@@ -202,7 +211,11 @@ header h2 {
 section {
   display: flex;
   flex-wrap: wrap;
-  padding: 5rem 3rem 1rem 3rem;
+  align-items: center;
+  max-width: 1440px;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 5rem 1rem 1rem 1rem;
 }
 
 .player + div {
