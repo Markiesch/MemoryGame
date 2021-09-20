@@ -1,4 +1,3 @@
-<!-- eslint-disable -->
 <template>
   <main>
     <header>
@@ -76,20 +75,35 @@ export default class Game extends Vue {
     }, 1000);
   }
 
-  openCard(index: number, isBot: boolean) {
-    if (!isBot && this.currentPlayer === 1) return;
-    function getRandomIndex(cards: Card[]) {
-      let indexes = [];
-      for (const card of cards) {
-        if (card.selected === false) {
-          indexes.push(cards.indexOf(card));
-        }
+  getRandomIndex(cards: Card[]) {
+    let indexes = [];
+    for (const card of cards) {
+      if (card.selected === false) {
+        indexes.push(cards.indexOf(card));
       }
-
-      console.log(indexes);
-      const randomIndex = Math.floor(Math.random() * indexes.length);
-      return indexes[randomIndex];
     }
+    const randomIndex = Math.floor(Math.random() * indexes.length);
+    return indexes[randomIndex];
+  }
+
+  playBot() {
+    setTimeout(() => {
+      const index = this.getRandomIndex(this.cards);
+
+      this.openCard(index, true);
+      setTimeout(() => {
+        for (const card of this.cards) {
+          const toMatchName = this.cards[index].name;
+          const cardIndex = this.cards.indexOf(card);
+
+          if (this.cards[cardIndex].name === toMatchName && cardIndex != index) return this.openCard(cardIndex, true);
+        }
+      }, 600);
+    }, 1300);
+  }
+
+  openCard(index: number, isBot: boolean) {
+    if (this.mode === "bot" && !isBot && this.currentPlayer === 1) return;
     if (this.openedCards.includes(index)) return;
     this.clicks++;
     if (this.clicks === 1) this.startTimer();
@@ -126,12 +140,7 @@ export default class Game extends Vue {
         }
 
         if (this.mode === "bot" && this.currentPlayer === 1) {
-          setTimeout(() => {
-            this.openCard(getRandomIndex(this.cards), true);
-            setTimeout(() => {
-              this.openCard(getRandomIndex(this.cards), true);
-            }, 600);
-          }, 1300);
+          this.playBot();
         }
       } else {
         if (this.mode === "multiplayer" || this.mode === "bot") {
@@ -154,12 +163,7 @@ export default class Game extends Vue {
           this.openedCards = [];
 
           if (this.mode === "bot" && this.currentPlayer) {
-            setTimeout(() => {
-              this.openCard(getRandomIndex(this.cards), true);
-              setTimeout(() => {
-                this.openCard(getRandomIndex(this.cards), true);
-              }, 600);
-            }, 300);
+            this.playBot();
           }
         }, 1000);
       }
