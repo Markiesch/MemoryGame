@@ -21,7 +21,7 @@
           @click="openCard(index, false)"
           :class="{ open: card.selected, correct: card.correct, incorrect: card.error, hidden: card.hidden }"
         >
-          <img :src="getImgUrl(card.name)" :alt="card.name" />
+          <img :src="require(`../assets/fruits/${card.name}`)" :alt="card.name" />
         </article>
       </div>
       <div class="player player2" :class="{ ghostplayer: currentPlayer === 0 }">
@@ -42,7 +42,7 @@ import { Card, Settings, Player, recentGame } from "../store/utils";
 let interval: any;
 
 @Component({
-  beforeRouteLeave(to, from, next) {
+  beforeRouteLeave(_to, _from, next) {
     clearInterval(interval);
     next();
   },
@@ -187,10 +187,6 @@ export default class Game extends Vue {
     this.$store.commit("setLatestGame", save);
   }
 
-  getImgUrl(pic: string): string {
-    return require("../assets/fruits/" + pic);
-  }
-
   init() {
     if (this.loadRecent && this.latestGame !== null) {
       this.cards = this.latestGame.cards;
@@ -211,9 +207,8 @@ export default class Game extends Vue {
 
       let index = 0;
       const cardInterval = setInterval(() => {
-        const shuffledName = shuffledNames[index];
         this.cards.push({
-          name: shuffledName,
+          name: shuffledNames[index],
           selected: false,
           error: false,
           correct: false,
