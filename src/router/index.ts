@@ -1,10 +1,5 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
-import Home from "../views/Home.vue";
-import Mode from "../views/Mode.vue";
-import Game from "../views/Game.vue";
-import Victory from "../views/Victory.vue";
-import Settings from "../views/Settings.vue";
 
 Vue.use(VueRouter);
 
@@ -12,27 +7,27 @@ const routes: RouteConfig[] = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    component: () => import("@/views/Home.vue"),
   },
   {
     path: "/mode",
     name: "Mode",
-    component: Mode,
+    component: () => import("@/views/Mode.vue"),
   },
   {
     path: "/play",
     name: "Game",
-    component: Game,
+    component: () => import("@/views/Game.vue"),
   },
   {
     path: "/settings",
     name: "Settings",
-    component: Settings,
+    component: () => import("@/views/Settings.vue"),
   },
   {
     path: "/victory",
     name: "Victory",
-    component: Victory,
+    component: () => import("@/views/Victory.vue"),
   },
   {
     path: "*",
