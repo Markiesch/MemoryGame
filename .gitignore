@@ -1,9 +1,1 @@
-/.idea
-/.vscode
 node_modules
-
-yarn.lock
-babel.config.js
-.eslintrc.js
-.eslintignore
-.browserslistc
