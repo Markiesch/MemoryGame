@@ -1,0 +1,77 @@
+section {
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 2;
+}
+
+.player + div {
+  flex: 1 1 400px;
+}
+
+.player {
+  flex: 1 1 100px;
+}
+
+.player2 {
+  text-align: right;
+}
+
+.player-name {
+  position: relative;
+  font-weight: 400;
+  color: var(--primary-color);
+  font-size: 50px;
+}
+
+.deck {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 0.5em;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  user-select: none;
+  cursor: pointer;
+
+  padding-bottom: 100%;
+  background-color: white;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 90%;
+  opacity: 0;
+  user-select: none;
+  pointer-events: none;
+  filter: drop-shadow(-5px -5px 15px rgba(0, 0, 0, 0.25));
+}
+
+.open img,
+.correct img {
+  opacity: 1;
+}
+
+.incorrect {
+  background: linear-gradient(to top left, #ad3838, #ff5252);
+}
+
+.correct {
+  background: linear-gradient(to top left, #347536, #54c057);
+  pointer-events: none;
+}
+
+.hidden {
+  pointer-events: none;
+  opacity: 0;
+}
