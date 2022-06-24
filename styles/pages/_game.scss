@@ -8,6 +8,12 @@ h1 {
   padding: 2rem 0;
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .deck {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;

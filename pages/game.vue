@@ -1,6 +1,9 @@
 <template>
   <section>
-    <h1>Memory game</h1>
+    <div class="header">
+      <h1>Memory game</h1>
+      <span v-show="isBotPlaying">Bot is playing</span>
+    </div>
     <div class="deck" :class="{ disabled: deckDisabled || isBotPlaying }">
       <div class="card" v-for="card of cards" @click="handleClick(card)" :class="{ open: card.selected, correct: card.correct, incorrect: card.error }">
         <img v-if="card.selected || card.correct" :src="`fruits/${card.image}`" :alt="card.image" />
@@ -27,6 +30,7 @@ interface Player {
 
 const SLOTS = ["apple.png", "banana.png", "coconut.png", "kiwi.png", "melon.png", "pear.png", "pineapple.png", "plum.png", "grapes.png", "orange.png", "raspberries.png", "cherry.png"];
 
+let audio: HTMLAudioElement | undefined;
 let cards = ref<Card[]>([]);
 
 const players = ref<Player[]>([]);
@@ -68,8 +72,7 @@ async function handleClick(card: Card) {
 
   deckDisabled.value = true;
 
-  const audio = new Audio("flip_card.mp3");
-
+  if (audio == null) audio = new Audio("flip_card.mp3");
   audio.play();
 
   // Open card
