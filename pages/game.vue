@@ -1,7 +1,7 @@
 <template>
   <section>
-    <h1>Play {{ activePlayerIndex }}</h1>
-    <div class="deck" :class="{ disabled: deckDisabled }">
+    <h1>Memory game</h1>
+    <div class="deck" :class="{ disabled: deckDisabled || isBotPlaying }">
       <div class="card" v-for="card of cards" @click="handleClick(card)" :class="{ open: card.selected, correct: card.correct, incorrect: card.error }">
         <img v-if="card.selected || card.correct" :src="`fruits/${card.image}`" :alt="card.image" />
       </div>
@@ -38,16 +38,12 @@ onMounted(() => {
   players.value.push({ score: 0, clicks: 0, bot: false });
   players.value.push({ score: 0, clicks: 0, bot: true });
 
-  for (let i = 0; i < 8; i++) {
-    cards.value.push({
-      image: SLOTS[i],
-      selected: false,
-      error: false,
-      correct: false,
-    });
+  const singleItems = SLOTS.slice(0, 8);
+  const items = shuffle([...singleItems, ...singleItems]);
 
+  for (const item of items) {
     cards.value.push({
-      image: SLOTS[i],
+      image: item,
       selected: false,
       error: false,
       correct: false,
@@ -61,6 +57,10 @@ const activePlayer = computed(() => {
 
 const openedCards = computed(() => {
   return cards.value.filter((card) => card.selected);
+});
+
+const isBotPlaying = computed(() => {
+  return activePlayer.value?.bot;
 });
 
 async function handleClick(card: Card) {
@@ -101,9 +101,9 @@ async function handleClick(card: Card) {
     closeCards();
   }
 
-  const incorrectCard = cards.value.find((card) => !card.correct);
+  const hasIncorrectCard = !!cards.value.find((card) => !card.correct);
 
-  if (!incorrectCard) {
+  if (!hasIncorrectCard) {
     await useRouter().push("/");
     return;
   }
@@ -111,7 +111,7 @@ async function handleClick(card: Card) {
   deckDisabled.value = false;
 
   if (activePlayer.value.bot) {
-    await pause(200);
+    await pause(400);
     playBot();
   }
 }
@@ -133,6 +133,18 @@ function playBot() {
   botMemory.push(card);
 
   handleClick(card);
+}
+
+function shuffle<T>(cards: T[]): T[] {
+  let currentIndex = cards.length;
+  let randomIndex: number;
+
+  while (currentIndex != 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [cards[currentIndex], cards[randomIndex]] = [cards[randomIndex], cards[currentIndex]];
+  }
+  return cards;
 }
 </script>
 
