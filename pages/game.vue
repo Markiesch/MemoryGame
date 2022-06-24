@@ -1,12 +1,15 @@
 <template>
-  <section>
+  <!-- :class="{ open: card.selected, correct: card.correct, incorrect: card.error }" -->
+  <v-container :class="{ disabled: deckDisabled }">
     <h1>Play {{ activePlayerIndex }}</h1>
-    <div class="deck" :class="{ disabled: deckDisabled }">
-      <div class="card" v-for="card of cards" @click="handleClick(card)" :class="{ open: card.selected, correct: card.correct, incorrect: card.error }">
-        <img :src="`fruits/${card.image}`" :alt="card.image" />
-      </div>
-    </div>
-  </section>
+    <v-row>
+      <v-col cols="6" lg="3" v-for="card of cards" @click="handleClick(card)">
+        <v-card class="pa-4" style="height: 20rem" :color="card.correct ? 'green' : ''">
+          <v-img v-if="card.selected || card.correct" :aspect-ratio="1 / 1" :src="`fruits/${card.image}`" :alt="card.image" />
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script lang="ts" setup>
@@ -124,7 +127,3 @@ function playBot() {
   handleClick(card);
 }
 </script>
-
-<style lang="scss" scoped>
-@use "@/styles/pages/game";
-</style>
