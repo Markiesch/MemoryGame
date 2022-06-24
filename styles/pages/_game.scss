@@ -4,25 +4,6 @@ section {
   padding: 2;
 }
 
-.player + div {
-  flex: 1 1 400px;
-}
-
-.player {
-  flex: 1 1 100px;
-}
-
-.player2 {
-  text-align: right;
-}
-
-.player-name {
-  position: relative;
-  font-weight: 400;
-  color: var(--primary-color);
-  font-size: 50px;
-}
-
 .deck {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -42,7 +23,7 @@ section {
 
   padding-bottom: 100%;
   background-color: white;
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(black, 0.2);
 }
 
 .card img {
@@ -51,15 +32,9 @@ section {
   left: 50%;
   transform: translate(-50%, -50%);
   height: 90%;
-  opacity: 0;
   user-select: none;
   pointer-events: none;
   filter: drop-shadow(-5px -5px 15px rgba(0, 0, 0, 0.25));
-}
-
-.open img,
-.correct img {
-  opacity: 1;
 }
 
 .incorrect {
@@ -67,8 +42,8 @@ section {
 }
 
 .correct {
-  background: linear-gradient(to top left, #347536, #54c057);
   pointer-events: none;
+  opacity: 0.4;
 }
 
 .hidden {
