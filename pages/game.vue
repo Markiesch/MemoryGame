@@ -88,9 +88,12 @@ async function handleClick(card: Card) {
       card1.correct = true;
       card2.correct = true;
     } else {
-      await pause(1000);
+      card1.error = true;
+      card2.error = true;
+      await pause(1200);
 
-      console.log("wrong");
+      card1.error = false;
+      card2.error = false;
 
       activePlayerIndex.value = activePlayerIndex.value === 1 ? 0 : 1;
     }
