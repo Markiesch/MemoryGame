@@ -14,20 +14,10 @@
     </Head>
   </Html>
 
-  <div id="app">
-    <main>
+  <v-app>
+    <v-main>
       <NuxtPage />
-    </main>
-    <Navigation />
-  </div>
+    </v-main>
+    <v-app-bar color="grey-lighten-2" location="bottom"></v-app-bar>
+  </v-app>
 </template>
-
-<style lang="scss">
-@use "@/styles/base/reset";
-
-#app {
-  display: grid;
-  min-height: 100vh;
-  grid-template-rows: 1fr auto;
-}
-</style>

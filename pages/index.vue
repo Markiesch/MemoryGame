@@ -6,9 +6,3 @@
     </NuxtLink>
   </section>
 </template>
-
-<script setup lang="ts"></script>
-
-<style lang="scss" scoped>
-@use "/styles/pages/index";
-</style>
