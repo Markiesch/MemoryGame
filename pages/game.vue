@@ -3,7 +3,7 @@
     <h1>Play {{ activePlayerIndex }}</h1>
     <div class="deck" :class="{ disabled: deckDisabled }">
       <div class="card" v-for="card of cards" @click="handleClick(card)" :class="{ open: card.selected, correct: card.correct, incorrect: card.error }">
-        <img :src="`fruits/${card.image}`" :alt="card.image" />
+        <img v-if="card.selected || card.correct" :src="`fruits/${card.image}`" :alt="card.image" />
       </div>
     </div>
   </section>
@@ -68,6 +68,10 @@ async function handleClick(card: Card) {
 
   deckDisabled.value = true;
 
+  const audio = new Audio("flip_card.mp3");
+
+  audio.play();
+
   // Open card
   card.selected = true;
 
@@ -102,7 +106,11 @@ async function handleClick(card: Card) {
   }
 
   deckDisabled.value = false;
-  playBot();
+
+  if (activePlayer.value.bot) {
+    await pause(200);
+    playBot();
+  }
 }
 
 function closeCards() {
