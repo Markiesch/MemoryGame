@@ -1,0 +1,84 @@
+h1 {
+  padding: 2rem 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.deck {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 0.5em;
+}
+
+.deck.disabled {
+  pointer-events: none;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  user-select: none;
+  cursor: pointer;
+
+  padding-bottom: 100%;
+  background-color: white;
+  border: 1px solid rgba(black, 0.2);
+}
+
+.card img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 90%;
+  user-select: none;
+  pointer-events: none;
+  filter: drop-shadow(-5px -5px 15px rgba(0, 0, 0, 0.25));
+}
+
+.incorrect {
+  background: linear-gradient(to top left, #ad3838, #ff5252);
+  animation: shake 600ms infinite reverse;
+}
+
+.correct {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.hidden {
+  pointer-events: none;
+  opacity: 0;
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}

@@ -1,9 +1,9 @@
 <template>
-  <section class="navigator-container">
-    <NuxtLink to="/game" class="singleplayer navigator">
-      <h5>New Game</h5>
-      <p>Ready to play?</p>
-    </NuxtLink>
+  <section>
+    <div class="card">
+      <h2>Memory game</h2>
+      <NuxtLink to="/game" class="singleplayer navigator">Start</NuxtLink>
+    </div>
   </section>
 </template>
 
