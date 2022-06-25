@@ -1,35 +1,31 @@
 <template>
   <section v-if="started">
-    <GameMemory :players="players" />
+    <GameMemory />
   </section>
   <section v-else>
-    <div>
-      <div v-for="player in players">{{ player }}</div>
+    <div class="card--container">
+      <div class="player--card" :class="player.avatar.color" v-for="(player, index) in players">
+        <img :src="`/avatars/${player.bot ? 'robot' : player.avatar.src}x256.png`" alt="" />
+        <div class="overlay">
+          <button @click="removePlayer(index)">
+            <IconTrash />
+          </button>
+          <button @click="player.bot = !player.bot">Toggle bot</button>
+        </div>
+      </div>
     </div>
-    <button @click="addPlayer">New Player</button>
+    <button @click="createPlayer()">New Player</button>
     <button @click="startGame">Start</button>
   </section>
 </template>
 
 <script lang="ts" setup>
-import players from "@/store/Players";
-
-onMounted(() => {
-  players.value = JSON.parse(localStorage.getItem("players"));
-});
+const { players, createPlayer, removePlayer } = usePlayers();
 
 let started = ref(false);
 
 function startGame() {
   started.value = true;
-}
-
-function addPlayer() {
-  players.value.push({
-    clicks: 0,
-    score: 0,
-    bot: false,
-  });
 }
 </script>
 
