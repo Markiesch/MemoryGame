@@ -1,4 +1,8 @@
 interface Player {
+  avatar: {
+    src: string;
+    color: string;
+  };
   score: number;
   clicks: number;
   bot: boolean;
