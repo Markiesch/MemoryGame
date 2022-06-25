@@ -25,6 +25,27 @@
 <style lang="scss">
 @use "@/styles/base/reset";
 
+$blue: #0468fc;
+$aqua: #2e8f96;
+$gold: #ffad63;
+$purple: #9061c9;
+
+.blue {
+  color: $blue;
+}
+
+.aqua {
+  color: $aqua;
+}
+
+.gold {
+  color: $aqua;
+}
+
+.purple {
+  color: $purple;
+}
+
 #app {
   display: grid;
   min-height: 100vh;
