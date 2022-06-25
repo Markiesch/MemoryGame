@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
   gap: 1rem;
+  padding: 2.5rem 0;
 }
 
 .player--card {
@@ -17,17 +18,25 @@
   &::after {
     content: "";
     position: absolute;
-    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
+    height: 80%;
     background-color: currentColor;
-    clip-path: polygon(0 20%, 100% 20%, 100% 100%, 0% 100%);
+    transition: height 300ms ease;
     z-index: -1;
+  }
+
+  &:hover::after {
+    height: 100%;
   }
 
   .overlay {
     position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
     background-color: white;
     color: black;
     margin: 0 1rem;
@@ -46,6 +55,7 @@
   button {
     background: none;
     border: none;
+    line-height: 0;
 
     svg {
       height: 1rem;
