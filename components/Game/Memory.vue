@@ -1,12 +1,16 @@
 <template>
   <section>
-    {{ players }}
-    {{ activePlayer }}
     <div class="header">
       <h1>Memory game</h1>
-
       <span v-show="isBotPlaying">Bot is playing</span>
     </div>
+
+    <div class="card--container">
+      <div class="player--card" :class="[player.avatar.color, { active: activePlayerIndex === index }]" v-for="(player, index) in players">
+        <img :src="`/avatars/${player.bot ? 'robot' : player.avatar.src}x256.png`" alt="" />
+      </div>
+    </div>
+
     <div class="deck" :class="{ disabled: deckDisabled || isBotPlaying }">
       <div class="card" v-for="card of cards" @click="handleClick(card)" :class="{ open: card.selected, correct: card.correct, incorrect: card.error }">
         <img v-if="card.selected || card.correct" :src="`fruits/${card.image}`" :alt="card.image" />
@@ -20,8 +24,7 @@ import { shuffle, pause } from "~~/scripts/utils";
 const SLOTS = ["apple.png", "banana.png", "coconut.png", "kiwi.png", "melon.png", "pear.png", "pineapple.png", "plum.png", "grapes.png", "orange.png", "raspberries.png", "cherry.png"];
 
 // Props
-const props = defineProps<{ players: Player[] }>();
-const { players } = toRefs(props);
+const { players } = usePlayers();
 
 // Properties
 let audio: HTMLAudioElement | undefined;
