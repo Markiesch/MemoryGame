@@ -120,6 +120,10 @@ function playBot() {
 
   handleClick(card);
 }
+
+onMounted(() => {
+  playBot();
+});
 </script>
 
 <style lang="scss" scoped>
