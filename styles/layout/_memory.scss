@@ -5,39 +5,6 @@
   padding-bottom: 4rem;
 }
 
-.player--card {
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  transition: transform 300ms ease;
-
-  img {
-    width: 100%;
-  }
-
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: currentColor;
-    clip-path: polygon(0 20%, 100% 20%, 100% 100%, 0% 100%);
-    transition: clip-path 300ms ease;
-    z-index: -1;
-  }
-
-  &.active {
-    transform: scale(1.05) translateY(10px);
-
-    &::after {
-      clip-path: polygon(0 0%, 100% 0%, 100% 100%, 0% 100%);
-    }
-  }
-}
-
 .deck {
   max-width: 60rem;
   margin: 0 auto;

@@ -6,9 +6,7 @@
     </div>
 
     <div class="card--container">
-      <div class="player--card" :class="[player.avatar.color, { active: activePlayerIndex === index }]" v-for="(player, index) in players">
-        <img :src="`/avatars/${player.bot ? 'robot' : player.avatar.src}x256.png`" alt="" />
-      </div>
+      <PlayerCard v-for="(player, index) in players" :class="{ active: activePlayerIndex === index }" :player="player" :overlay="false" />
     </div>
 
     <div class="deck" :class="{ disabled: deckDisabled || isBotPlaying }">
