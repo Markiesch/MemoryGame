@@ -56,6 +56,8 @@ async function handleClick(card: Card) {
   deckDisabled.value = true;
 
   if (audio == null) audio = new Audio("flip_card.mp3");
+  audio.pause();
+  audio.currentTime = 0;
   audio.play();
 
   // Open card
