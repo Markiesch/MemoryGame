@@ -1,4 +1,6 @@
 interface Player {
+  id: number;
+
   avatar: {
     src: string;
     color: string;
