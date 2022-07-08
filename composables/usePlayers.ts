@@ -16,7 +16,11 @@ export const usePlayers = () => {
     const src = AVATARS[Math.floor(Math.random() * AVATARS.length)];
     const color = COLORS[Math.floor(Math.random() * COLORS.length)];
 
+    const ids = players.value.map((player) => player.id);
+    const id = ids.length ? Math.max(...ids) + 1 : 0;
+
     players.value.push({
+      id,
       avatar: { src, color },
       clicks: 0,
       score: 0,
@@ -24,7 +28,12 @@ export const usePlayers = () => {
     });
   }
 
-  function removePlayer(index: number) {
+  function removePlayer(id: number) {
+    const player = players.value.find((player) => player.id === id);
+
+    if (!player) throw new Error("Player id was not found");
+
+    const index = players.value.indexOf(player);
     players.value.splice(index, 1);
   }
 
