@@ -1,42 +1,12 @@
-# Nuxt 3 Minimal Starter
-
-Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
-
-## Setup
-
-Make sure to install the dependencies:
-
-```bash
-# yarn
-yarn install
-
-# npm
-npm install
-
-# pnpm
-pnpm install --shamefully-hoist
-```
-
-## Development Server
-
-Start the development server on http://localhost:3000
-
-```bash
-npm run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.
+<div align="center">
+    <a href="https://vue-memory-games.netlify.app/" target="_blank">
+        <img src="https://github.com/Markiesch/MemoryGame/blob/main/src/assets/logo.png" alt="Logo" width="80" height="80" />
+    </a>
+    <h1>Vue Memory Game</h1>
+    <p>The classic memory game, with your favorite fruits</p>
+    <a href="https://memory.markschuurmans.nl/" target="_blank">View Website</a>
+    ·
+    <a href="https://github.com/Markiesch/MemoryGame/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/Markiesch/MemoryGame/issues">Request Feature</a>
+</div>
