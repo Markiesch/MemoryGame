@@ -11,6 +11,7 @@ interface Player {
 }
 
 interface Card {
+  index: number;
   image: string;
   selected: boolean;
   error: boolean;
